@@ -1,0 +1,22 @@
+// Dirty Template for BFS
+// https://github.com/niquehandi/Templates_cp
+
+
+while (!queue.isEmpty()) {
+            int node = queue.poll();
+            if (graph.containsKey(node)) {
+                for (Integer neighbor : graph.get(node)) {
+                    // Find the cost  this edge by searchin in passages
+                    for (WeightedEdge edge : passages) {
+                        if (edge.first == node && edge.second == neighbor) {
+                            int newDist = distance[node] + edge.cost; // Calculate  new distance
+                            if (distance[neighbor] == -1) { // If not visited
+                                distance[neighbor] = newDist;
+                                queue.add(neighbor); // Add the neighbor to the queue
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
