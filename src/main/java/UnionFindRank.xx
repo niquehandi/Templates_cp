@@ -1,0 +1,31 @@
+//TEMPLATE FOR UNION-FIND
+
+    // Union-Find: Find with path compression
+  private static int find(int x, int[] parent) {
+        if (parent[x] != x) {
+            parent[x] = find(parent[x], parent); // Path compression
+        }
+        return parent[x];
+    }
+
+    // Union-Find: Union by rank
+    private static boolean union(int x, int y, int[] parent, int[] rank) {
+        int rootX = find(x, parent);
+        int rootY = find(y, parent);
+
+        if (rootX == rootY) {
+            return false; // Already connected
+        }
+
+        // Union by rank
+        if (rank[rootX] > rank[rootY]) {
+            parent[rootY] = rootX;
+        } else if (rank[rootX] < rank[rootY]) {
+            parent[rootX] = rootY;
+        } else {
+            parent[rootY] = rootX;
+            rank[rootX]++;
+        }
+        return true;
+    }
+   
